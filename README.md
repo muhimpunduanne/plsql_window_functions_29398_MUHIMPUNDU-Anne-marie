@@ -125,12 +125,43 @@ This helps design loyalty programs and promotions targeted at different spending
 
 ![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/66df80084f476f1fb0ec006ca8d69dc19382c5b3/ScreenShoots/Distribution%20Functions.png)
 
+Step6: Result Analysis
+--
+Descriptive Analysis
+--
+Kigali region shows highest medication sales.
 
+Painkillers dominate overall sales volume.
 
+Platinum quartile customers contribute most revenue.
 
+Diagnostic Analysis
+--
+Kigali’s dominance due to population density and purchasing power.
 
+Seasonal dips in March linked to reduced spending after holidays.
 
+Antibiotics and supplements drive steady revenue.
 
+Prescriptive Analysis
+--
+Increase stock of top-selling medications in Kigali.
+
+Target Platinum and Gold customers with loyalty programs.
+
+Promote supplements in lower-performing regions.
+
+Launch campaigns for inactive customers identified via LEFT JOIN.
+
+Step7: References
+--
+PostgreSQL Documentation – Window Functions
+
+PostgreSQL JOINs Guide
+
+"Database System Concepts" by Silberschatz, Korth, Sudarshan
+
+ACM Digital Library – SQL Best Practices
 
 
 
