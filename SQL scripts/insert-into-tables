@@ -1,1 +1,28 @@
+-- Insert into customers
+INSERT INTO customers (name, region, age) VALUES
+('Alice Uwimana', 'Kigali', 34),
+('Jean Habimana', 'Musanze', 45),
+('Claudine Mukamana', 'Huye', 29),
+('Eric Niyonzima', 'Kigali', 52);
 
+-- Insert into products
+
+INSERT INTO products (product_name, category, price) VALUES
+('Paracetamol', 'Painkiller', 2.50),
+('Amoxicillin', 'Antibiotic', 5.00),
+('Vitamin C', 'Supplement', 3.00),
+('Ibuprofen', 'Painkiller', 4.00);
+
+-- Insert into sales
+
+INSERT INTO sales (customer_id, product_id, sale_date, quantity, amount) VALUES
+(1, 1, '2026-01-05', 2, 5.00),
+(2, 2, '2026-01-10', 1, 5.00),
+(1, 3, '2026-01-15', 3, 9.00),
+(3, 4, '2026-01-20', 1, 4.00);
+
+-- Add products that have not been sold yet
+INSERT INTO products (product_name, category, price) VALUES
+('Aspirin', 'Painkiller', 2.00),
+('Cough Syrup', 'Cold Remedy', 3.50),
+('Multivitamin', 'Supplement', 6.00);
