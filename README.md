@@ -95,7 +95,18 @@ This helps management see whether revenue is growing steadily or dropping season
 ![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/a7911e1fc7a6549c1fd4aaadbdd453e1874f4352/ScreenShoots/Aggregate%20Window%20Functions.png)
 
 
+3. Navigation Functions
+   --
+Explanation:  
+Pharmacie Conseil wants to compare sales month by month. Navigation functions let us look backward or forward in the data.
 
+LAG() retrieves the previous month’s sales.
+
+LEAD() retrieves the next month’s sales.
+
+By comparing current vs previous, we calculate growth percentage.
+
+This shows whether sales are increasing or decreasing, helping management react quickly.
 
 
 
