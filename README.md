@@ -35,6 +35,7 @@ Step2: Success Criteria
 Define exactly 5 measurable goals:
 
 1.Top 5 products per region/quarter → RANK()
+--
 
     WITH regional_products AS (
     SELECT 
@@ -52,16 +53,60 @@ WHERE region_rank <= 5
 ORDER BY region, region_rank;
 
 2.Running monthly sales totals → SUM() OVER()
--
+--
+Explanation:  
+Pharmacie Conseil needs to track cumulative revenue month by month. Running totals show how sales are building up over time, helping management measure progress toward revenue goals.
+
 SELECT 
-    TO_CHAR(sale_date, 'YYYY-MM') AS sale_month,
+    DATE_TRUNC('month', sale_date) AS sale_month,
     SUM(amount) AS monthly_sales,
     SUM(SUM(amount)) OVER (
-        ORDER BY TO_CHAR(sale_date, 'YYYY-MM')
+        ORDER BY DATE_TRUNC('month', sale_date)
         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
     ) AS running_total
-FROM transactions
-GROUP BY TO_CHAR(sale_date, 'YYYY-MM')
+FROM sales
+GROUP BY DATE_TRUNC('month', sale_date)
+ORDER BY sale_month;
+
+3. Month-over-month growth → LAG()/LEAD()
+   --
+Explanation:  
+Pharmacie Conseil wants to compare sales between months to see growth or decline. Using LAG(), we look at the previous month’s sales and calculate the percentage change. This helps identify seasonal dips or growth trends.
+
+
+WITH monthly_data AS (
+    SELECT 
+        DATE_TRUNC('month', sale_date) AS sale_month,
+        SUM(amount) AS monthly_sales
+    FROM sales
+    GROUP BY DATE_TRUNC('month', sale_date)
+)
+SELECT 
+    sale_month,
+    monthly_sales,
+    LAG(monthly_sales) OVER (ORDER BY sale_month) AS prev_month,
+    ROUND(
+        ((monthly_sales - LAG(monthly_sales) OVER (ORDER BY sale_month)) / 
+        NULLIF(LAG(monthly_sales) OVER (ORDER BY sale_month), 0)) * 100, 2
+    ) AS growth_pct
+FROM monthly_data
+ORDER BY sale_month;
+
+3-month moving averages → AVG() OVER()
+--
+Explanation:  
+Pharmacie Conseil wants to smooth out monthly fluctuations and see long‑term trends. A 3‑month moving average shows whether sales are consistently rising or falling, helping with forecasting and planning.
+
+sql
+SELECT 
+    DATE_TRUNC('month', sale_date) AS sale_month,
+    SUM(amount) AS monthly_sales,
+    ROUND(AVG(SUM(amount)) OVER (
+        ORDER BY DATE_TRUNC('month', sale_date)
+        ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+    ), 2) AS moving_avg_3month
+FROM sales
+GROUP BY DATE_TRUNC('month', sale_date)
 ORDER BY sale_month;
 
 Step3: Database Schema
