@@ -74,7 +74,7 @@ CUSTOMERS
 
 products
 --
-![Image Alt]()
+![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/14c77ca8985548101459e8e15ea6a8b47ea97d21/products%20table.png)
 
 Step4: Window Function Implementation
 --
