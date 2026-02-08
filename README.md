@@ -5,7 +5,7 @@
 
 PL/SQL Window Functions Assignment
 ---
-Name: MUHIMPUNDU Anne‑Marie
+Name: MUHIMPUNDU Anne Marie
 
 
 ID: 29398
@@ -68,7 +68,7 @@ FROM sales
 GROUP BY DATE_TRUNC('month', sale_date)
 ORDER BY sale_month;
 
-3. Month-over-month growth → LAG()/LEAD()
+3.Month-over-month growth → LAG()/LEAD()
    --
 Explanation:  
 Pharmacie Conseil wants to compare sales between months to see growth or decline. Using LAG(), we look at the previous month’s sales and calculate the percentage change. This helps identify seasonal dips or growth trends.
@@ -92,7 +92,7 @@ SELECT
 FROM monthly_data
 ORDER BY sale_month;
 
-3-month moving averages → AVG() OVER()
+4.month moving averages → AVG() OVER()
 --
 Explanation:  
 Pharmacie Conseil wants to smooth out monthly fluctuations and see long‑term trends. A 3‑month moving average shows whether sales are consistently rising or falling, helping with forecasting and planning.
