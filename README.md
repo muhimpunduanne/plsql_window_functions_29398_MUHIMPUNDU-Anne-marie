@@ -63,6 +63,12 @@ SELECT
 FROM transactions
 GROUP BY TO_CHAR(sale_date, 'YYYY-MM')
 ORDER BY sale_month;
+Step3: Database Schema
+--
+Here is the 3 tables that are created
+
+CUSTOMERS
+--
 
 Step4: Window Function Implementation
 --
