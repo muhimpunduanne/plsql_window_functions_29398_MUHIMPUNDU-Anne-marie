@@ -63,6 +63,7 @@ SELECT
 FROM transactions
 GROUP BY TO_CHAR(sale_date, 'YYYY-MM')
 ORDER BY sale_month;
+
 Step3: Database Schema
 --
 Here is the 3 tables that are created
@@ -70,6 +71,10 @@ Here is the 3 tables that are created
 CUSTOMERS
 --
 ![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/6de7ccad7b5f4f2b2efc980ea2682ab14259cdf0/customertable.png)
+
+products
+--
+![Image Alt]()
 
 Step4: Window Function Implementation
 --
