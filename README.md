@@ -92,7 +92,7 @@ AVG() OVER with a frame (like 3 months) smooths fluctuations and highlights long
 
 This helps management see whether revenue is growing steadily or dropping seasonally.
 
-
+![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/a7911e1fc7a6549c1fd4aaadbdd453e1874f4352/ScreenShoots/Aggregate%20Window%20Functions.png)
 
 
 
