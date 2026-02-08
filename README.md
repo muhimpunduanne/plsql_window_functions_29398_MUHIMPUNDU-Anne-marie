@@ -79,6 +79,7 @@ DENSE_RANK() shows position without gaps.
 PERCENT_RANK() shows relative standing as a percentage.
 
 This helps identify top spenders (Platinum customers) and compare them across regions.
+![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/b46e8f49c1c38c92b743dab93ed7b32dee0b378d/ScreenShoots/Ranking%20Functions.png)
 
 
 
