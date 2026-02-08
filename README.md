@@ -108,7 +108,7 @@ By comparing current vs previous, we calculate growth percentage.
 
 This shows whether sales are increasing or decreasing, helping management react quickly.
 
-
+![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/4ed27cb8461a2fe95304e7730459d0f472d1ee25/ScreenShoots/Navigation%20Functions.png)
 
 
 
