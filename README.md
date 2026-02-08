@@ -123,7 +123,7 @@ CUME_DIST() shows how far along the distribution each customer is compared to ot
 This helps design loyalty programs and promotions targeted at different spending levels.
 
 
-
+![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/66df80084f476f1fb0ec006ca8d69dc19382c5b3/ScreenShoots/Distribution%20Functions.png)
 
 
 
