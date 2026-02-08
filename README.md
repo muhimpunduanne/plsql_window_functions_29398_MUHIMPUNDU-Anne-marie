@@ -111,6 +111,16 @@ This shows whether sales are increasing or decreasing, helping management react 
 ![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/4ed27cb8461a2fe95304e7730459d0f472d1ee25/ScreenShoots/Navigation%20Functions.png)
 
 
+4. Distribution Functions
+   --
+Explanation:  
+Pharmacie Conseil wants to segment customers into groups for marketing. Distribution functions divide customers into quartiles and show their relative position.
+
+NTILE(4) splits customers into four groups (Platinum, Gold, Silver, Bronze).
+
+CUME_DIST() shows how far along the distribution each customer is compared to others.
+
+This helps design loyalty programs and promotions targeted at different spending levels.
 
 
 
