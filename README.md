@@ -76,6 +76,10 @@ products
 --
 ![Image Alt](https://github.com/muhimpunduanne/plsql_window_functions_29398_MUHIMPUNDU-Anne-marie/blob/14c77ca8985548101459e8e15ea6a8b47ea97d21/products%20table.png)
 
+sales
+--
+
+![Image Alt]()
 Step4: Window Function Implementation
 --
 1. RANKING
