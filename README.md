@@ -64,3 +64,36 @@ FROM transactions
 GROUP BY TO_CHAR(sale_date, 'YYYY-MM')
 ORDER BY sale_month;
 
+Step4: Window Function Implementation
+--
+1. RANKING
+   ---
+   Pharmacie Conseil wants to know which customers spend the most money in each region. Ranking functions allow us to assign positions to customers based on their total spending.
+
+ROW_NUMBER() gives each customer a unique sequential number.
+
+RANK() shows position but leaves gaps if there are ties.
+
+DENSE_RANK() shows position without gaps.
+
+PERCENT_RANK() shows relative standing as a percentage.
+
+This helps identify top spenders (Platinum customers) and compare them across regions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
