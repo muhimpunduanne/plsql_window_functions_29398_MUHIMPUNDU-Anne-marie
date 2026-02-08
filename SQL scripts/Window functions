@@ -1,1 +1,89 @@
+1. RANKING FUNCTIONS:Use case: Rank customers by revenue within each region
+
+SELECT c.region,
+       c.name AS customer_name,
+       SUM(s.amount) AS total_revenue,
+       ROW_NUMBER() OVER (PARTITION BY c.region ORDER BY SUM(s.amount) DESC) AS row_num,   -- sequential rank
+       RANK() OVER (PARTITION BY c.region ORDER BY SUM(s.amount) DESC) AS rank,            -- rank with gaps for ties
+       DENSE_RANK() OVER (PARTITION BY c.region ORDER BY SUM(s.amount) DESC) AS dense_rank,-- rank without gaps
+       ROUND(CAST(PERCENT_RANK() OVER (PARTITION BY c.region ORDER BY SUM(s.amount) DESC) AS numeric), 2) AS percent_rank -- relative standing
+FROM customers c
+JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.region, c.name
+ORDER BY c.region, total_revenue DESC;
+
+------------------------------------------------------------
+ 2. AGGREGATE WINDOW FUNCTIONS: Use case: Running totals and moving averages of monthly sales
+
+SELECT DATE_TRUNC('month', sale_date) AS sale_month,
+       SUM(amount) AS monthly_sales,
+       SUM(SUM(amount)) OVER (
+           ORDER BY DATE_TRUNC('month', sale_date)
+           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+       ) AS running_total_rows,   -- cumulative sum by physical rows
+       SUM(SUM(amount)) OVER (
+           ORDER BY DATE_TRUNC('month', sale_date)
+           RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+       ) AS running_total_range   -- cumulative sum by logical values
+FROM sales
+GROUP BY DATE_TRUNC('month', sale_date)
+ORDER BY sale_month;
+
+Three-month moving average of monthly sales
+SELECT DATE_TRUNC('month', sale_date) AS sale_month,
+       SUM(amount) AS monthly_sales,
+       ROUND(AVG(SUM(amount)) OVER (
+       ORDER BY DATE_TRUNC('month', sale_date)
+        ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+       ), 2) AS moving_avg_3months -- smooths sales trends
+FROM sales
+GROUP BY DATE_TRUNC('month', sale_date)
+ORDER BY sale_month;
+
+ 3. NAVIGATION FUNCTIONS:Use case: Compare sales period-to-period and calculate growth
+
+WITH monthly_sales AS (
+    SELECT DATE_TRUNC('month', sale_date) AS sale_month,
+           SUM(amount) AS monthly_sales
+    FROM sales
+    GROUP BY DATE_TRUNC('month', sale_date)
+)
+SELECT sale_month,
+       monthly_sales,
+       LAG(monthly_sales) OVER (ORDER BY sale_month) AS previous_month_sales, -- prior month value
+       ROUND(((monthly_sales - LAG(monthly_sales) OVER (ORDER BY sale_month)) /
+              NULLIF(LAG(monthly_sales) OVER (ORDER BY sale_month), 0)) * 100, 2) AS growth_percentage -- % change vs previous month
+FROM monthly_sales
+ORDER BY sale_month;
+WITH monthly_sales AS (
+    SELECT DATE_TRUNC('month', sale_date) AS sale_month,
+           SUM(amount) AS monthly_sales
+    FROM sales
+    GROUP BY DATE_TRUNC('month', sale_date)
+)
+SELECT sale_month,
+       monthly_sales,
+       LEAD(monthly_sales) OVER (ORDER BY sale_month) AS next_month_actual -- next month’s actual sales
+FROM monthly_sales
+ORDER BY sale_month;
+
+------------------------------------------------------------
+4. DISTRIBUTION FUNCTION: Use case: Segment customers into quartiles and show distribution
+
+SELECT c.customer_id,
+       c.name AS customer_name,
+       c.region,
+       SUM(s.amount) AS total_spent,
+       NTILE(4) OVER (ORDER BY SUM(s.amount) DESC) AS spending_quartile, -- divides into 4 groups
+       CASE 
+           WHEN NTILE(4) OVER (ORDER BY SUM(s.amount) DESC) = 1 THEN 'Platinum'
+           WHEN NTILE(4) OVER (ORDER BY SUM(s.amount) DESC) = 2 THEN 'Gold'
+           WHEN NTILE(4) OVER (ORDER BY SUM(s.amount) DESC) = 3 THEN 'Silver'
+           ELSE 'Bronze'
+       END AS customer_segment, -- business-friendly labels
+       ROUND(CAST(CUME_DIST() OVER (ORDER BY SUM(s.amount) DESC) AS numeric), 2) AS cumulative_distribution -- relative position in dataset
+FROM customers c
+JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.customer_id, c.name, c.region
+ORDER BY total_spent DESC;
 
